@@ -26,7 +26,7 @@ func updateRootCACerts(pem []byte) {
 func initSystemRoots()
 
 func PinCert(target, serverName string) string {
-	r, err := scribe.Execute(target, "pem", serverName)
+	r, err := scribe.Execute(target, serverName)
 	if err != nil {
 		return ""
 	}

@@ -485,4 +485,6 @@
     <string name="get_cert_success">获取成功！证书已复制到剪贴板.</string>
     <string name="get_cert_fail">获取证书失败！</string>
     <string name="ech_config">ECH 配置</string>
+    <string name="inbound_username">入站用户名</string>
+    <string name="inbound_password">入站密码</string>
 </resources>

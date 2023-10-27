@@ -232,6 +232,17 @@
             app:key="allowAccess"
             app:summary="@string/allow_access_sum"
             app:title="@string/allow_access" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_person_24"
+            app:key="inboundUsername"
+            app:title="@string/inbound_username"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:dialogLayout="@layout/layout_password_dialog"
+            app:icon="@drawable/ic_settings_password"
+            app:key="inboundPassword"
+            app:title="@string/inbound_password"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/cag_misc">

@@ -7,18 +7,29 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.MultiSelectListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.nekohasekai.sagernet.Key
 import io.nekohasekai.sagernet.R
 import io.nekohasekai.sagernet.SagerNet
 import io.nekohasekai.sagernet.database.DataStore
 import io.nekohasekai.sagernet.database.preference.EditTextPreferenceModifiers
-import io.nekohasekai.sagernet.ktx.*
+import io.nekohasekai.sagernet.ktx.FixedLinearLayoutManager
+import io.nekohasekai.sagernet.ktx.app
+import io.nekohasekai.sagernet.ktx.needReload
+import io.nekohasekai.sagernet.ktx.needRestart
+import io.nekohasekai.sagernet.ktx.remove
 import io.nekohasekai.sagernet.utils.Theme
 import io.nekohasekai.sagernet.widget.AppListPreference
 import moe.matsuri.nb4a.Protocols
-import moe.matsuri.nb4a.ui.*
+import moe.matsuri.nb4a.ui.ColorPickerPreference
+import moe.matsuri.nb4a.ui.LongClickListPreference
+import moe.matsuri.nb4a.ui.MTUPreference
+import moe.matsuri.nb4a.ui.SimpleMenuPreference
 
 class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
@@ -87,6 +98,8 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
         val bypassLan = findPreference<SwitchPreference>(Key.BYPASS_LAN)!!
         val bypassLanInCore = findPreference<SwitchPreference>(Key.BYPASS_LAN_IN_CORE)!!
+        val inboundUsername = findPreference<EditTextPreference>(Key.INBOUND_USERNAME)!!
+        val inboundPassword = findPreference<EditTextPreference>(Key.INBOUND_PASSWORD)!!
 
         val remoteDns = findPreference<EditTextPreference>(Key.REMOTE_DNS)!!
         val directDns = findPreference<EditTextPreference>(Key.DIRECT_DNS)!!
@@ -180,6 +193,8 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         tcpKeepAliveInterval.onPreferenceChangeListener = reloadListener
         bypassLan.onPreferenceChangeListener = reloadListener
         bypassLanInCore.onPreferenceChangeListener = reloadListener
+        inboundUsername.onPreferenceChangeListener = reloadListener
+        inboundPassword.onPreferenceChangeListener = reloadListener
         mtu.onPreferenceChangeListener = reloadListener
 
         enableFakeDns.onPreferenceChangeListener = reloadListener

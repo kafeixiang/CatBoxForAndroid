@@ -31,7 +31,24 @@ import io.nekohasekai.sagernet.ktx.isIpAddress
 import io.nekohasekai.sagernet.ktx.mkPort
 import io.nekohasekai.sagernet.utils.PackageCache
 import moe.matsuri.nb4a.Protocols
-import moe.matsuri.nb4a.SingBoxOptions.*
+import moe.matsuri.nb4a.SingBoxOptions.ClashAPIOptions
+import moe.matsuri.nb4a.SingBoxOptions.DNSFakeIPOptions
+import moe.matsuri.nb4a.SingBoxOptions.DNSOptions
+import moe.matsuri.nb4a.SingBoxOptions.DNSRule_DefaultOptions
+import moe.matsuri.nb4a.SingBoxOptions.DNSServerOptions
+import moe.matsuri.nb4a.SingBoxOptions.ExperimentalOptions
+import moe.matsuri.nb4a.SingBoxOptions.Inbound_DirectOptions
+import moe.matsuri.nb4a.SingBoxOptions.Inbound_MixedOptions
+import moe.matsuri.nb4a.SingBoxOptions.Inbound_TunOptions
+import moe.matsuri.nb4a.SingBoxOptions.LogOptions
+import moe.matsuri.nb4a.SingBoxOptions.MultiplexOptions
+import moe.matsuri.nb4a.SingBoxOptions.MyOptions
+import moe.matsuri.nb4a.SingBoxOptions.Outbound
+import moe.matsuri.nb4a.SingBoxOptions.Outbound_SelectorOptions
+import moe.matsuri.nb4a.SingBoxOptions.Outbound_SocksOptions
+import moe.matsuri.nb4a.SingBoxOptions.RouteOptions
+import moe.matsuri.nb4a.SingBoxOptions.Rule_DefaultOptions
+import moe.matsuri.nb4a.SingBoxOptions.User
 import moe.matsuri.nb4a.SingBoxOptionsUtil
 import moe.matsuri.nb4a.checkEmpty
 import moe.matsuri.nb4a.makeSingBoxRule
@@ -251,6 +268,14 @@ fun buildConfig(
                 domain_strategy = genDomainStrategy(DataStore.resolveDestination)
                 sniff = needSniff
                 sniff_override_destination = needSniffOverride
+                if (!DataStore.inboundUsername.isNullOrEmpty() || !DataStore.inboundPassword.isNullOrEmpty()) {
+                    users = listOf(
+                        User().apply {
+                            username = DataStore.inboundUsername
+                            password = DataStore.inboundPassword
+                        }
+                    )
+                }
             })
         }
 

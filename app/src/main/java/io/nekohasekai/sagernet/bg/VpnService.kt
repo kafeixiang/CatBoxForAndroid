@@ -17,7 +17,6 @@ import io.nekohasekai.sagernet.ktx.*
 import io.nekohasekai.sagernet.ui.VpnRequestActivity
 import io.nekohasekai.sagernet.utils.Subnet
 import libcore.*
-import moe.matsuri.nb4a.net.LocalResolverImpl
 import moe.matsuri.nb4a.proxy.neko.needBypassRootUid
 import android.net.VpnService as BaseVpnService
 
@@ -191,7 +190,8 @@ class VpnService : BaseVpnService(),
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && DataStore.appendHttpProxy) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && DataStore.appendHttpProxy &&
+            DataStore.inboundUsername.isNullOrEmpty() && DataStore.inboundPassword.isNullOrEmpty()) {
             builder.setHttpProxy(ProxyInfo.buildDirectProxy(LOCALHOST, DataStore.mixedPort))
         }
 
