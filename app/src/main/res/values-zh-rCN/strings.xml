@@ -487,4 +487,6 @@
     <string name="ech_config">ECH 配置</string>
     <string name="inbound_username">入站用户名</string>
     <string name="inbound_password">入站密码</string>
+    <string name="http_upgrade_host">HTTPUpgrade 主机</string>
+    <string name="http_upgrade_path">HTTPUpgrade 路径</string>
 </resources>
