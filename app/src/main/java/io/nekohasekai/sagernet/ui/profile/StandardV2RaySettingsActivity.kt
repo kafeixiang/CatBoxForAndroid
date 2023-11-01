@@ -164,6 +164,7 @@ abstract class StandardV2RaySettingsActivity : ProfileSettingsActivity<StandardV
                 path.preference.isVisible = true
                 wsCategory.isVisible = true
             }
+
             "grpc" -> {
                 path.preference.setTitle(R.string.grpc_service_name)
                 path.preference.isVisible = true
