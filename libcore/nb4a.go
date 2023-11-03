@@ -6,8 +6,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-
-	// "time"
 	_ "unsafe"
 
 	"log"

@@ -528,5 +528,7 @@ Anyone can write advanced plugins, which can control CatBox. please download and
     <string name="ech_config">ECH configuration</string>
     <string name="inbound_username">Inbound username</string>
     <string name="inbound_password">Inbound password</string>
+    <string name="http_upgrade_host">HTTPUpgrade Host</string>
+    <string name="http_upgrade_path">HTTPUpgrade Path</string>
 
 </resources>

@@ -18,7 +18,7 @@ class SocksSettingsActivity : ProfileSettingsActivity<SOCKSBean>() {
         DataStore.serverAddress = serverAddress
         DataStore.serverPort = serverPort
 
-        DataStore.serverProtocolInt = protocol ?: SOCKSBean.PROTOCOL_SOCKS5
+        DataStore.serverProtocolInt = protocol
         DataStore.serverUsername = username
         DataStore.serverPassword = password
 
@@ -36,6 +36,7 @@ class SocksSettingsActivity : ProfileSettingsActivity<SOCKSBean>() {
 
         sUoT = DataStore.profileCacheStore.getBoolean("sUoT")
     }
+
     override fun PreferenceFragmentCompat.createPreferences(
         savedInstanceState: Bundle?,
         rootKey: String?,
@@ -53,7 +54,7 @@ class SocksSettingsActivity : ProfileSettingsActivity<SOCKSBean>() {
             password.isVisible = version == SOCKSBean.PROTOCOL_SOCKS5
         }
 
-        updateProtocol(DataStore.serverProtocolInt)
+        updateProtocol(DataStore.protocolVersion)
         protocol.setOnPreferenceChangeListener { _, newValue ->
             updateProtocol((newValue as String).toInt())
             true

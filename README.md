@@ -9,7 +9,7 @@ sing-box / universal proxy toolchain for Android.
 
 一款使用 sing-box 的 Android 通用代理软件。
 
-改编自 [NekoBoxForAndroid](https://github.com/MatsuriDayo/NekoBoxForAndroid)，移除了一些不令人喜欢的内容，改进了部分情况下的体验。
+改编自 [NekoBoxForAndroid](https://github.com/MatsuriDayo/NekoBoxForAndroid)，改进了部分情况下的体验。
 
 ## 下载 / Downloads
 
@@ -26,10 +26,6 @@ sing-box / universal proxy toolchain for Android.
     height="80">](https://f-droid.org/packages/moe.cb4a)
 
 [F-Droid](https://f-droid.org/packages/moe.cb4a)
-
-## 更改记录 & 发布频道 / Changelog & Telegram channel
-
-<https://t.me/AntiNek0>
 
 ## 项目主页 & 文档 / Homepage & Documents
 
@@ -60,6 +56,14 @@ Please visit [here](https://AntiNeko.github.io/m-plugin/) to download plugins.
 * 原始格式：一些广泛使用的格式（如 shadowsocks、clash 和 v2rayN）
 
 ## 开发 / Development
+
+### 发布新版本之前......
+
+* `go mod tidy`
+
+* 升级版本信息（[nb4a.properties](./nb4a.properties)）。
+
+* 确保测试 CI 通过。
 
 ### 编译
 

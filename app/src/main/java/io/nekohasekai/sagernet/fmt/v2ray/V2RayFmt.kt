@@ -4,26 +4,8 @@ import android.text.TextUtils
 import com.google.gson.Gson
 import io.nekohasekai.sagernet.fmt.http.HttpBean
 import io.nekohasekai.sagernet.fmt.trojan.TrojanBean
-import io.nekohasekai.sagernet.ktx.Logs
-import io.nekohasekai.sagernet.ktx.decodeBase64UrlSafe
-import io.nekohasekai.sagernet.ktx.getStr
-import io.nekohasekai.sagernet.ktx.linkBuilder
-import io.nekohasekai.sagernet.ktx.readableMessage
-import io.nekohasekai.sagernet.ktx.toLink
-import io.nekohasekai.sagernet.ktx.urlSafe
-import moe.matsuri.nb4a.SingBoxOptions.Outbound
-import moe.matsuri.nb4a.SingBoxOptions.OutboundECHOptions
-import moe.matsuri.nb4a.SingBoxOptions.OutboundRealityOptions
-import moe.matsuri.nb4a.SingBoxOptions.OutboundTLSOptions
-import moe.matsuri.nb4a.SingBoxOptions.OutboundUTLSOptions
-import moe.matsuri.nb4a.SingBoxOptions.Outbound_HTTPOptions
-import moe.matsuri.nb4a.SingBoxOptions.Outbound_TrojanOptions
-import moe.matsuri.nb4a.SingBoxOptions.Outbound_VLESSOptions
-import moe.matsuri.nb4a.SingBoxOptions.Outbound_VMessOptions
-import moe.matsuri.nb4a.SingBoxOptions.V2RayTransportOptions
-import moe.matsuri.nb4a.SingBoxOptions.V2RayTransportOptions_GRPCOptions
-import moe.matsuri.nb4a.SingBoxOptions.V2RayTransportOptions_HTTPOptions
-import moe.matsuri.nb4a.SingBoxOptions.V2RayTransportOptions_WebsocketOptions
+import io.nekohasekai.sagernet.ktx.*
+import moe.matsuri.nb4a.SingBoxOptions.*
 import moe.matsuri.nb4a.utils.NGUtil
 import moe.matsuri.nb4a.utils.listByLineOrComma
 import okhttp3.HttpUrl
@@ -135,6 +117,15 @@ fun parseV2Ray(link: String): StandardV2RayBean {
                     bean.path = it
                 }
             }
+
+            "httpUpgrade" -> {
+                url.queryParameter("path")?.let {
+                    bean.path = it
+                }
+                url.queryParameter("host")?.let {
+                    bean.host = it
+                }
+            }
         }
 
         bean.packetEncoding = 1 // It is comes from V2Ray!
@@ -233,6 +224,15 @@ fun StandardV2RayBean.parseDuckSoft(url: HttpUrl) {
 
         "grpc" -> {
             url.queryParameter("serviceName")?.let {
+                path = it
+            }
+        }
+
+        "httpUpgrade" -> {
+            url.queryParameter("host")?.let {
+                host = it
+            }
+            url.queryParameter("path")?.let {
                 path = it
             }
         }
@@ -485,7 +485,7 @@ fun StandardV2RayBean.toUriVMessVLESSTrojan(isTrojan: Boolean): String {
 
     when (type) {
         "tcp" -> {}
-        "ws", "http" -> {
+        "ws", "http", "httpUpgrade" -> {
             if (host.isNotBlank()) {
                 builder.addQueryParameter("host", host)
             }
@@ -601,6 +601,14 @@ fun buildSingBoxOutboundStreamSettings(bean: StandardV2RayBean): V2RayTransportO
             return V2RayTransportOptions_GRPCOptions().apply {
                 type = "grpc"
                 service_name = bean.path
+            }
+        }
+
+        "httpUpgrade" -> {
+            return V2RayTransportOptions_HTTPUpgradeOptions().apply {
+                type = "httpUpgrade"
+                host = bean.host
+                path = bean.path
             }
         }
     }

@@ -140,7 +140,7 @@ abstract class StandardV2RaySettingsActivity : ProfileSettingsActivity<StandardV
         }
     }
 
-    fun updateView(network: String) {
+    private fun updateView(network: String) {
         host.preference.isVisible = false
         path.preference.isVisible = false
         wsCategory.isVisible = false
@@ -150,6 +150,7 @@ abstract class StandardV2RaySettingsActivity : ProfileSettingsActivity<StandardV
                 host.preference.setTitle(R.string.http_host)
                 path.preference.setTitle(R.string.http_path)
             }
+
             "http" -> {
                 host.preference.setTitle(R.string.http_host)
                 path.preference.setTitle(R.string.http_path)
@@ -163,8 +164,16 @@ abstract class StandardV2RaySettingsActivity : ProfileSettingsActivity<StandardV
                 path.preference.isVisible = true
                 wsCategory.isVisible = true
             }
+
             "grpc" -> {
                 path.preference.setTitle(R.string.grpc_service_name)
+                path.preference.isVisible = true
+            }
+
+            "httpupgrade" -> {
+                host.preference.setTitle(R.string.http_upgrade_host)
+                path.preference.setTitle(R.string.http_upgrade_path)
+                host.preference.isVisible = true
                 path.preference.isVisible = true
             }
         }
