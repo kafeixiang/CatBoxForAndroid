@@ -346,16 +346,8 @@ class MainActivity : ThemedActivity(),
             R.id.nav_traffic -> displayFragment(WebviewFragment())
             R.id.nav_tools -> displayFragment(ToolsFragment())
             R.id.nav_logcat -> displayFragment(LogcatFragment())
-            R.id.nav_faq -> {
-                launchCustomTab("https://AntiNeko.github.io")
-                return false
-            }
 
             R.id.nav_about -> displayFragment(AboutFragment())
-            R.id.nav_tuiguang -> {
-                launchCustomTab("https://HystericalDragon.github.io/donate")
-                return false
-            }
 
             else -> return false
         }
